@@ -12,8 +12,12 @@
                             </div>
 
                             <div class="card-body">
-                                <div class="alert alert-danger" *nfIf="loginError">
-                                    Login e/ou Senha incorreto(a)!
+                                <div class="alert alert-success" *ngIf="mensagemSucesso">
+                                    {{ mensagemSucesso }}
+                                </div>
+
+                                <div class="alert alert-danger" *ngFor="let error of errors">
+                                    {{ error }}
                                 </div>
 
                                 <form #loginForm="ngForm" (submit)="onSubmit()">
@@ -38,11 +42,12 @@
                                             Enviar
                                         </button>
 
-                                        <button type="submit" class="btn btn-success" *ngIf="cadastrando">
+                                        <button type="button" class="btn btn-success"
+                                            (click)="cadastrar()" *ngIf="cadastrando">
                                             Cadastrar
                                         </button>
 
-                                        <button type="submit" 
+                                        <button type="button" 
                                             (click)="cancelaCadastro()"
                                             class="btn btn-danger ml-1" *ngIf="cadastrando">
                                             Cancelar
